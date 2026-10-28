@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="World Islamic Digital Library — discover Islamic books, Quran resources, Hadith, Seerah, and learning materials in many languages.">
+<title>World Islamic Digital Library</title>
+<style>
+:root {
+  --site-primary: #0D493B;
+  --site-secondary: #D9B56D;
+  --site-background: #F6F4EC;
+  --site-on-primary: #FFFFFF;
+  --site-on-secondary: #182B24;
+  --site-on-background: #1E302A;
+  --site-font-body: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --site-font-heading: Georgia, "Times New Roman", serif;
+  --site-heading-scale: 1;
+  --site-spacing-scale: 1;
+  --site-radius-scale: 1;
+  --site-decoration-opacity: 1;
+  color-scheme: light dark;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: var(--site-font-body); color: light-dark(#1E302A,#E7EFEA); background: light-dark(#F6F4EC,#101A17); line-height: 1.55; }
+#app { min-height: 100vh; width: 100%; border-radius: 0; background-color: light-dark(var(--site-background), #101A17); color: light-dark(var(--site-on-background), #E7EFEA); }
+a { color: inherit; }
+header { background: var(--site-primary); color: var(--site-on-primary); }
+.nav { max-width: 1180px; margin: auto; padding: calc(18px * var(--site-spacing-scale)) 22px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+.brand { display:flex; align-items:center; gap:12px; font-weight:750; letter-spacing:.01em; }
+.brand-mark { display:grid; place-items:center; width:42px; height:42px; border:1px solid #D9B56D; color:#F0D9A4; border-radius:50%; font-size:23px; }
+.brand span:last-child { max-width:250px; line-height:1.15; }
+.nav-actions { display:flex; align-items:center; gap:12px; }
+select, input, button { font:inherit; }
+select { border:1px solid #8BB0A5; background:#123F34; color:white; border-radius:10px; padding:10px; max-width:150px; }
+.hero { position:relative; overflow:hidden; background:linear-gradient(115deg,#0D493B 0%,#125947 65%,#1D6A55 100%); color:#fff; }
+.hero:after { content:"۞"; position:absolute; right:3%; top:-90px; font-size:340px; color:#fff; opacity:calc(.055 * var(--site-decoration-opacity)); pointer-events:none; }
+.hero-inner { max-width:1180px; margin:auto; padding:70px 22px 74px; position:relative; z-index:1; }
+.eyebrow { color:#E7CB8E; text-transform:uppercase; font-size:.78rem; font-weight:800; letter-spacing:.16em; }
+h1,h2,h3 { font-family:var(--site-font-heading); line-height:1.12; }
+h1 { font-size:calc(clamp(2.6rem,6vw,4.8rem) * var(--site-heading-scale)); max-width:780px; margin:16px 0; letter-spacing:-.035em; }
+.hero p { max-width:680px; font-size:1.12rem; color:#E4EEE9; }
+.search { display:flex; max-width:700px; margin-top:30px; padding:7px; border-radius:15px; background:#fff; box-shadow:0 12px 35px #001a1233; gap:8px; }
+.search input { flex:1; min-width:0; border:0; outline:0; padding:13px 14px; color:#1E302A; background:#fff; }
+button,.button { border:0; border-radius:10px; padding:12px 17px; background:var(--site-secondary); color:#182B24; font-weight:750; cursor:pointer; text-decoration:none; display:inline-block; }
+button:hover,.button:hover { filter:brightness(.96); transform:translateY(-1px); }
+.quick-stats { display:flex; flex-wrap:wrap; gap:24px; margin-top:26px; color:#D6E7DF; font-size:.92rem; }
+main { max-width:1180px; margin:auto; padding:48px 22px 70px; }
+.section-head { display:flex; justify-content:space-between; align-items:end; gap:16px; margin-bottom:22px; }
+h2 { font-size:calc(2.15rem * var(--site-heading-scale)); margin:0 0 8px; }
+.muted { color:light-dark(#64766E,#A7B7B0); margin:0; }
+.grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:16px; }
+.card { border:1px solid light-dark(#DCE3D9,#2D4038); background:light-dark(#FFFFFF,#17241F); border-radius:calc(16px * var(--site-radius-scale)); padding:21px; min-height:170px; }
+.card-icon { width:48px; height:48px; display:grid; place-items:center; border-radius:14px; background:light-dark(#EAF2EC,#243B31); font-size:25px; margin-bottom:15px; }
+.card h3 { font-size:1.25rem; margin:0 0 7px; }
+.card p { color:light-dark(#64766E,#A7B7B0); font-size:.93rem; margin:0; }
+.book-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:20px; }
+.book { display:flex; gap:15px; align-items:flex-start; padding:18px; border:1px solid light-dark(#DCE3D9,#2D4038); background:light-dark(#FFFFFF,#17241F); border-radius:14px; }
+.book-cover { width:58px; height:76px; flex:0 0 58px; display:grid; place-items:center; border-radius:6px 10px 10px 6px; background:#0D493B; color:#E7CB8E; font-size:24px; box-shadow:inset 5px 0 #ffffff1c; }
+.book h3 { margin:0 0 5px; font-size:1.12rem; }
+.book p { margin:0 0 10px; color:light-dark(#64766E,#A7B7B0); font-size:.87rem; }
+.small-link { font-size:.88rem; color:light-dark(#0D634E,#9BD9C1); font-weight:700; text-decoration:none; }
+.notice { margin-top:28px; border-left:4px solid var(--site-secondary); background:light-dark(#EFE9D8,#262A20); padding:17px 20px; border-radius:0 12px 12px 0; font-size:.92rem; }
+.languages { display:flex; flex-wrap:wrap; gap:9px; margin-top:18px; }
+.lang { border:1px solid light-dark(#D4DED5,#334A40); background:light-dark(#fff,#17241F); border-radius:99px; padding:8px 13px; font-size:.9rem; }
+footer { background:light-dark(#E9E9DD,#0B1310); border-top:1px solid light-dark(#DCE3D9,#2D4038); }
+.footer-inner { max-width:1180px; margin:auto; padding:28px 22px; display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; font-size:.9rem; color:light-dark(#64766E,#A7B7B0); }
+.empty { display:none; padding:20px; border:1px dashed #9AAEA3; border-radius:12px; margin-top:16px; }
+@media(max-width:850px) { .grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .book-list { grid-template-columns:repeat(2,minmax(0,1fr)); } .hero-inner { padding-top:54px; } }
+@media(max-width:560px) { .nav { align-items:flex-start; } .brand span:last-child { max-width:165px; font-size:.9rem; } .nav-actions { flex-direction:column; align-items:flex-end; } select { max-width:125px; } .hero-inner { padding:48px 18px 55px; } main { padding:38px 18px 55px; } .grid,.book-list { grid-template-columns:1fr; } .section-head { align-items:flex-start; flex-direction:column; } .search { flex-wrap:wrap; } .search input { flex-basis:100%; } .search button { width:100%; } }
+</style>
+</head>
+<body>
+<div id="app">
+<header>
+  <nav class="nav" aria-label="Main navigation">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">۞</span><span>World Islamic<br>Digital Library</span></div>
+    <div class="nav-actions">
+      <select id="language" aria-label="Choose interface language">
+        <option value="en">English</option><option value="hi">हिन्दी</option><option value="ur">اردو</option><option value="ar">العربية</option>
+      </select>
+      <a class="button" href="#collections" id="browseButton">Browse books</a>
+    </div>
+  </nav>
+</header>
+<section class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow" id="eyebrow">Knowledge • Reflection • Discovery</div>
+    <h1 id="heroTitle">A world of Islamic knowledge, open to everyone.</h1>
+    <p id="heroText">Explore Qur’an resources, Hadith collections, Seerah, Islamic history and learning materials in languages from around the world.</p>
+    <form class="search" id="searchForm">
+      <input id="searchInput" type="search" placeholder="Search books, topics or authors…" aria-label="Search library">
+      <button type="submit" id="searchButton">Search library</button>
+    </form>
+    <div class="quick-stats"><span>🌐 Multilingual collection</span><span>📖 Curated learning resources</span><span>🔎 Search by topic</span></div>
+  </div>
+</section>
+<main>
+  <section aria-labelledby="categoriesTitle">
+    <div class="section-head"><div><h2 id="categoriesTitle">Explore the library</h2><p class="muted" id="categoriesSub">Start with a subject and discover trusted resources.</p></div></div>
+    <div class="grid" id="categoryGrid">
+      <article class="card" data-search="quran qur'an koran कुरआन قرآن"><div class="card-icon">📖</div><h3>Qur’an & Tafsir</h3><p>Qur’anic text, translations and commentary resources.</p></article>
+      <article class="card" data-search="hadith hadees حدیث"><div class="card-icon">📜</div><h3>Hadith Collections</h3><p>Explore major Hadith collections and study guides.</p></article>
+      <article class="card" data-search="seerah prophet biography सीरत سیرت"><div class="card-icon">🌙</div><h3>Seerah of the Prophet ﷺ</h3><p>Biographies and resources on the Prophetic life.</p></article>
+      <article class="card" data-search="history islamic history تاریخ تاریخ اسلام"><div class="card-icon">🏛️</div><h3>Islamic History</h3><p>History, scholars, places and civilisations.</p></article>
+      <article class="card" data-search="belief aqeedah عقیدہ عقيدة"><div class="card-icon">✨</div><h3>Belief & Aqeedah</h3><p>Introductory resources on faith and belief.</p></article>
+      <article class="card" data-search="worship prayer salah namaz عبادت نماز"><div class="card-icon">🕌</div><h3>Worship & Practice</h3><p>Learning materials about prayer, fasting, zakat and Hajj.</p></article>
+      <article class="card" data-search="dua adhkar supplication دعا اذکار"><div class="card-icon">🤲</div><h3>Du’a & Adhkar</h3><p>Daily supplications and remembrance resources.</p></article>
+      <article class="card" data-search="ethics family character اخلاق परिवार"><div class="card-icon">🌿</div><h3>Ethics & Family</h3><p>Character, family life and everyday Islamic ethics.</p></article>
+    </div>
+  </section>
+  <section id="collections" style="margin-top:54px" aria-labelledby="featuredTitle">
+    <div class="section-head"><div><h2 id="featuredTitle">Featured starting points</h2><p class="muted" id="featuredSub">A starter shelf of reputable resources to explore.</p></div></div>
+    <div class="book-list" id="bookList">
+      <article class="book" data-search="quran.com qur'an translations القرآن"><div class="book-cover">۞</div><div><h3>Qur’an and translations</h3><p>Read and compare available translations online.</p><a class="small-link" href="https://quran.com/" target="_blank" rel="noopener noreferrer">Open resource ↗</a></div></article>
+      <article class="book" data-search="sunnah hadith collections السنة الحديث"><div class="book-cover">📜</div><div><h3>Sunnah and Hadith resources</h3><p>Search Hadith resources and study references.</p><a class="small-link" href="https://sunnah.com/" target="_blank" rel="noopener noreferrer">Open resource ↗</a></div></article>
+      <article class="book" data-search="archive islamic books history"><div class="book-cover">📚</div><div><h3>Historical book collections</h3><p>Find digitised books; check each item's reuse rights.</p><a class="small-link" href="https://archive.org/" target="_blank" rel="noopener noreferrer">Explore archive ↗</a></div></article>
+    </div>
+    <div class="empty" id="emptyState">No matching items in this starter collection. Try another word or language.</div>
+    <div class="notice"><strong>Collection policy:</strong> This is an early website prototype. Links open external resources; not every linked book is free to download or redistribute. We will only host PDFs when the licence or rights holder permits it, and will label translations and editions clearly.</div>
+  </section>
+  <section style="margin-top:46px" aria-labelledby="languageTitle">
+    <h2 id="languageTitle">Knowledge across languages</h2>
+    <p class="muted">The library is designed to grow language by language. Availability depends on each book and its authorised translation.</p>
+    <div class="languages"><span class="lang">العربية · Arabic</span><span class="lang">اردو · Urdu</span><span class="lang">हिन्दी · Hindi</span><span class="lang">English</span><span class="lang">বাংলা · Bengali</span><span class="lang">Bahasa Indonesia</span><span class="lang">Türkçe · Turkish</span><span class="lang">Français · French</span><span class="lang">فارسی · Persian</span><span class="lang">தமிழ் · Tamil</span></div>
+  </section>
+</main>
+<footer><div class="footer-inner"><div><strong>World Islamic Digital Library</strong><br><span id="footerTagline">A growing gateway to Islamic learning.</span></div><div>Respect for sources · Copyright-aware sharing · Accessible learning</div></div></footer>
+</div>
+<script>
+const translations = {
+ en:{browse:"Browse books",eyebrow:"Knowledge • Reflection • Discovery",title:"A world of Islamic knowledge, open to everyone.",text:"Explore Qur’an resources, Hadith collections, Seerah, Islamic history and learning materials in languages from around the world.",placeholder:"Search books, topics or authors…",search:"Search library",cat:"Explore the library",catSub:"Start with a subject and discover trusted resources.",featured:"Featured starting points",featuredSub:"A starter shelf of reputable resources to explore.",tag:"A growing gateway to Islamic learning."},
+ hi:{browse:"किताबें देखें",eyebrow:"ज्ञान • चिंतन • खोज",title:"इस्लामी ज्ञान की दुनिया—सबके लिए खुली।",text:"कुरआन, हदीस, सीरत, इस्लामी इतिहास और दुनिया की विभिन्न भाषाओं में अध्ययन सामग्री खोजें।",placeholder:"किताब, विषय या लेखक खोजें…",search:"लाइब्रेरी में खोजें",cat:"लाइब्रेरी देखें",catSub:"किसी विषय से शुरुआत करें और उपयोगी स्रोत खोजें।",featured:"शुरुआत के लिए प्रमुख स्रोत",featuredSub:"खोजने के लिए कुछ विश्वसनीय शुरुआती स्रोत।",tag:"इस्लामी अध्ययन के लिए एक बढ़ता हुआ केंद्र।"},
+ ur:{browse:"کتابیں دیکھیں",eyebrow:"علم • غوروفکر • دریافت",title:"اسلامی علم کی دنیا، سب کے لیے کھلی۔",text:"قرآن، حدیث، سیرت، اسلامی تاریخ اور مختلف زبانوں میں تعلیمی مواد تلاش کریں۔",placeholder:"کتاب، موضوع یا مصنف تلاش کریں…",search:"لائبریری میں تلاش کریں",cat:"لائبریری دیکھیں",catSub:"کسی موضوع سے آغاز کریں اور مفید ذرائع تلاش کریں۔",featured:"ابتدائی اہم ذرائع",featuredSub:"مطالعے کے لیے چند ابتدائی ذرائع۔",tag:"اسلامی مطالعے کا ایک بڑھتا ہوا مرکز۔"},
+ ar:{browse:"تصفح الكتب",eyebrow:"المعرفة • التأمل • الاكتشاف",title:"عالم من المعرفة الإسلامية متاح للجميع.",text:"اكتشف موارد القرآن ومجموعات الحديث والسيرة والتاريخ الإسلامي ومواد التعلم بلغات متعددة.",placeholder:"ابحث عن كتاب أو موضوع أو مؤلف…",search:"ابحث في المكتبة",cat:"استكشف المكتبة",catSub:"ابدأ بموضوع واكتشف المصادر المفيدة.",featured:"مصادر للبدء",featuredSub:"مجموعة أولية من الموارد للاستكشاف.",tag:"بوابة متنامية للتعلم الإسلامي."}
+};
+document.getElementById("language").addEventListener("change", e => {
+ const t=translations[e.target.value]||translations.en;
+ document.documentElement.lang=e.target.value;
+ document.documentElement.dir=e.target.value==="ar"||e.target.value==="ur"?"rtl":"ltr";
+ document.getElementById("browseButton").textContent=t.browse;
+ document.getElementById("eyebrow").textContent=t.eyebrow;
+ document.getElementById("heroTitle").textContent=t.title;
+ document.getElementById("heroText").textContent=t.text;
+ document.getElementById("searchInput").placeholder=t.placeholder;
+ document.getElementById("searchButton").textContent=t.search;
+ document.getElementById("categoriesTitle").textContent=t.cat;
+ document.getElementById("categoriesSub").textContent=t.catSub;
+ document.getElementById("featuredTitle").textContent=t.featured;
+ document.getElementById("featuredSub").textContent=t.featuredSub;
+ document.getElementById("footerTagline").textContent=t.tag;
+});
+document.getElementById("searchForm").addEventListener("submit", e=>{
+ e.preventDefault();
+ const q=document.getElementById("searchInput").value.trim().toLowerCase();
+ let visible=0;
+ document.querySelectorAll("[data-search]").forEach(el=>{
+  const show=!q || (el.innerText+" "+el.dataset.search).toLowerCase().includes(q);
+  el.style.display=show?"":"none";
+  if(show) visible++;
+ });
+ document.getElementById("emptyState").style.display=visible?"none":"block";
+ document.getElementById("collections").scrollIntoView({behavior:"smooth",block:"start"});
+});
+</script>
+</body>
+</html>
